@@ -54,6 +54,7 @@ var update = function(data) {
 				$("#" + y + x).text("");
 		}
 	}
+	localStorage.setItem("data", JSON.stringify(data));
 }
 
 var initial = function() {
@@ -69,7 +70,9 @@ var initial = function() {
 }
 
 $(function() {
-	var data = initial();
+	var data = localStorage.getItem("data");
+	if(!data) data = initial();
+	else data = JSON.parse(data);
 	update(data);
 
 	$("#board a").click(function(event) {
