@@ -6,8 +6,8 @@ $(function() {
 			var horizontal = true;
 			var vertical = true;
 			for(var j = 0; j < 3; ++j) {
-				if(j == i) continue;
 				if(!board[i][j]) tie = false;
+				if(j == i) continue;
 				if(test != board[i][j]) vertical = false;
 				if(test != board[j][i]) horizontal = false;
 			}
@@ -38,10 +38,10 @@ $(function() {
 		$("#o").text(data.score.o);
 		for(var y = 0; y < 3; ++y) {
 			for(var x = 0; x < 3; ++x) {
-				if(data.board[y][x])
-					$("#" + y + x).text(data.board[y][x]);
-				else
-					$("#" + y + x).text("");
+				var element = $("#" + y + x);
+				var value = data.board[y][x];
+				if(value) element.text(value);
+				else element.text("");
 			}
 		}
 		localStorage.setItem("data", JSON.stringify(data));
