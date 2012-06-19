@@ -3,20 +3,26 @@
 	<head>
 		<title>Kurkkupastillivarvas</title>
 		<link type="text/css" rel="stylesheet" href="default.css" media="all" />
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+		<script type="text/javascript" src="main.js"></script>
 	</head>
 	<body>
 		<div id="container">
 			<h1>Kurkkupastillivarvas</h1>
+			<div id="scores">
+				Risti: <span id="cross">0</span><br/>
+				Nolla: <span id="zero">0</span>
+			</div>
 			<div id="board">
-				<a id="tl" href="#"></a>
+				<a id="tl" href="#">x</a>
 				<a id="tc" href="#"></a>
-				<a id="tr" href="#"></a>
-				<a id="cl" href="#"></a>
+				<a id="tr" href="#">x</a>
+				<a id="cl" href="#">o</a>
 				<a id="cc" href="#"></a>
-				<a id="cr" href="#"></a>
-				<a id="bl" href="#"></a>
-				<a id="bc" href="#"></a>
-				<a id="br" href="#"></a>
+				<a id="cr" href="#">o</a>
+				<a id="bl" href="#">x</a>
+				<a id="bc" href="#">o</a>
+				<a id="br" href="#">x</a>
 			</div>
 			<div id="controls">
 				<a id="reset" href="#">Reset</a>
