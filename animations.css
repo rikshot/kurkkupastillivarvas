@@ -1,0 +1,10 @@
+.flip {
+	-moz-animation-name: flip;
+	-moz-animation-duration: 1s;
+	-moz-animation-fill-mode: both;
+}
+
+@-moz-keyframes flip {
+	0% { text-size: 10px; }
+	100% { text-size: 20px; }
+}

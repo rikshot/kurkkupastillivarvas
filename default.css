@@ -1,6 +1,7 @@
 body {
 	background-color: #000;
 	color: #FF9900;
+	font-family: sans-serif;
 }
 
 h1 {
@@ -20,23 +21,23 @@ h1 {
 }
 
 #board {
-	width: 132px;
-	height: auto;
+	width: 120px;
 	margin: 0 auto;
-	clear: both;
 }
 
-#board a {
-	display: block;
+#board div {
 	width: 30px;
 	height: 30px;
 	float: left;
 	border: 2px solid #FF9900;
-	margin: 5px;
+	border-radius: 5px;
+	margin: 3px;
 	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
 	line-height: 30px;
-	text-decoration: none;
 	color: #FF9900;
+	cursor: pointer;
 }
 
 #controls {
