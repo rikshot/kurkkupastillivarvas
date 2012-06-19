@@ -32,6 +32,17 @@ var check = function(board) {
 		(board[0][2] == board[1][1] && board[1][1] == board[2][0]))
 		return board[1][1];
 
+	var tie = true;
+	for(var y = 0; y < 3; ++y) {
+		for(var x = 0; x < 3; ++x) {
+			if(!board[y][x]) {
+				tie = false;
+				break;
+			}
+		}
+	}
+	if(tie) return "tie";
+
 	return false;
 };
 
@@ -87,7 +98,7 @@ $(function() {
 			var result = check(data.board);
 			if(result) {
 				if(result == "x") ++data.score.x;
-				else ++data.score.o;
+				else if(result == "o") ++data.score.o;
 				clear(data.board);
 			}
 			update(data);
