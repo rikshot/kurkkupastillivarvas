@@ -1,15 +1,10 @@
-var turn = 'x';
-var x_score = 0;
-var o_score = 0;
-var board = null;
-
-var check = function() {
+var check = function(board) {
 	for(var y = 0; y < 3; ++y) {
-		var first = board[y][0].text();
-		if(first.length) {
+		var first = board[y][0];
+		if(first) {
 			var same = true;
 			for(var x = 1; x < 3; ++x) {
-				if(first != board[y][x].text()) {
+				if(first != board[y][x]) {
 					same = false;
 					break;
 				}
@@ -17,12 +12,13 @@ var check = function() {
 			if(same) return first;
 		}
 	}
+
 	for(var x = 0; x < 3; ++x) {
-		var first = board[0][x].text();
-		if(first.length) {
+		var first = board[0][x];
+		if(first) {
 			var same = true;
 			for(var y = 1; y < 3; ++y) {
-				if(first != board[y][x].text()) {
+				if(first != board[y][x]) {
 					same = false;
 					break;
 				}
@@ -30,44 +26,74 @@ var check = function() {
 			if(same) return first;
 		}
 	}
-	if(board[1][1].text().length && (board[0][0].text() == board[1][1].text() && board[1][1].text() == board[2][2].text()) || (board[0][2].text() == board[1][1].text() && board[1][1].text() == board[2][0].text())) return board[1][1].text();
+
+	if(board[1][1] &&
+		(board[0][0] == board[1][1] && board[1][1] == board[2][2]) ||
+		(board[0][2] == board[1][1] && board[1][1] == board[2][0]))
+		return board[1][1];
+
 	return false;
 };
 
-var clear = function() {
+var clear = function(board) {
 	for(var y = 0; y < 3; ++y) {
 		for(var x = 0; x < 3; ++x) {
-			board[y][x].text('');
+			board[y][x] = false;
 		}
 	}
 }
 
-var update_score = function(x_score, o_score) {
-	$("#cross").text(x_score);
-	$("#zero").text(o_score);
+var update = function(data) {
+	$("#x").text(data.score.x);
+	$("#o").text(data.score.o);
+	for(var y = 0; y < 3; ++y) {
+		for(var x = 0; x < 3; ++x) {
+			if(data.board[y][x])
+				$("#" + y + x).text(data.board[y][x]);
+			else
+				$("#" + y + x).text("");
+		}
+	}
+}
+
+var initial = function() {
+	return {
+		"turn": "x",
+		"score": {"x": 0, "o": 0},
+		"board": [
+			[false, false, false],
+			[false, false, false],
+			[false, false, false]
+		]
+	};
 }
 
 $(function() {
-	board = [
-		[$("#tl"), $("#tc"), $("#tr")],
-		[$("#cl"), $("#cc"), $("#cr")],
-		[$("#bl"), $("#bc"), $("#br")]
-	];
+	var data = initial();
+	update(data);
 
 	$("#board a").click(function(event) {
 		event.preventDefault();
-		var target = $(event.target);
-		if(!target.text().length) {
-			target.text(turn);
-			if(turn == 'x') turn = 'o';
-			else turn = 'x';
-			var result = check();
+		var id = event.target.id;
+		var y = parseInt(id[0]);
+		var x = parseInt(id[1]);
+		if(!data.board[y][x]) {
+			data.board[y][x] = data.turn;
+			if(data.turn == "x") data.turn = "o";
+			else data.turn = "x";
+			var result = check(data.board);
 			if(result) {
-				if(result == 'x') ++x_score;
-				else ++o_score;
-				clear();
-				update_score(x_score, o_score);
+				if(result == "x") ++data.score.x;
+				else ++data.score.o;
+				clear(data.board);
 			}
+			update(data);
 		}
+	});
+
+	$("#reset").click(function(event) {
+		event.preventDefault();
+		data = initial();
+		update(data);
 	});
 });
