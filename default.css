@@ -1,0 +1,30 @@
+body {
+	background-color: #000;
+	color: #FF9900;
+}
+
+#container {
+	width: 400px;
+	margin: 0 auto;
+	padding: 10px;
+	border: 2px solid #FF9900;
+	border-radius: 10px;
+}
+
+#board {
+	width: 110px;
+	margin: 0 auto;
+}
+
+#board a {
+	display: block;
+	width: 30px;
+	height: 30px;
+	float: left;
+	border: 2px solid #FF9900;
+	margin: 5px;
+}
+
+#controls {
+	clear: both;
+}
