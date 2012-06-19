@@ -1,25 +1,48 @@
 $(function() {
 	var check = function(board) {
-		var tie = true;
-		for(var i = 0; i < 3; ++i) {
-			var test = board[i][i];
-			var horizontal = true;
-			var vertical = true;
-			for(var j = 0; j < 3; ++j) {
-				if(!board[i][j]) tie = false;
-				if(j == i) continue;
-				if(test != board[i][j]) vertical = false;
-				if(test != board[j][i]) horizontal = false;
+		for(var y = 0; y < 3; ++y) {
+			var first = board[y][0];
+			if(first) {
+				var same = true;
+				for(var x = 1; x < 3; ++x) {
+					if(first != board[y][x]) {
+						same = false;
+						break;
+					}
+				}
+				if(same) return first;
 			}
-			if(vertical || horizontal) return test;
 		}
 
-		if(tie) return "tie";
+		for(var x = 0; x < 3; ++x) {
+			var first = board[0][x];
+			if(first) {
+				var same = true;
+				for(var y = 1; y < 3; ++y) {
+					if(first != board[y][x]) {
+						same = false;
+						break;
+					}
+				}
+				if(same) return first;
+			}
+		}
 
 		if(board[1][1] &&
 			(board[0][0] == board[1][1] && board[1][1] == board[2][2]) ||
 			(board[0][2] == board[1][1] && board[1][1] == board[2][0]))
-			return board[1][1];
+				return board[1][1];
+
+		var tie = true;
+		for(var y = 0; y < 3; ++y) {
+			for(var x = 0; x < 3; ++x) {
+				if(!board[y][x]) {
+					tie = false;
+					break;
+				}
+			}
+		}
+		if(tie) return "tie";
 
 		return false;
 	};
