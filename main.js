@@ -1,3 +1,6 @@
+var turn = 'x';
+var x_score = 0;
+var o_score = 0;
 var board = null;
 
 var check = function() {
@@ -45,10 +48,6 @@ var update_score = function(x_score, o_score) {
 }
 
 $(function() {
-	var turn = 'x';
-	var x_score = 0;
-	var o_score = 0;
-
 	board = [
 		[$("#tl"), $("#tc"), $("#tr")],
 		[$("#cl"), $("#cc"), $("#cr")],
